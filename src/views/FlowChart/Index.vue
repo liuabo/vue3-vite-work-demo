@@ -1,25 +1,12 @@
 <script setup>
 import FlowGraph from '@/views/FlowChart/Graph/index.js'
 
-defineOptions({ name: 'FlowChart' })
+defineOptions({name: 'FlowChart'})
 
 const tools = (graph) => {
-  graph.on('node:click', ({ cell, node }) => {
+  graph.on('node:click', ({cell, node}) => {
   });
-  graph.on('node:dblclick', ({ cell, node, e }) => {
-    const isNode = cell.isNode();
-    const name = cell.isNode() ? "node-editor" : "edge-editor";
-    cell.removeTool(name);
-    cell.addTools({
-      name,
-      args: {
-        event: e,
-        attrs: {
-          backgroundColor: isNode ? "#EFF4FF" : "#FFF",
-        },
-      },
-    });
-
+  graph.on('node:dblclick', ({cell, node, e}) => {
   })
 }
 const inInit = () => {
@@ -32,9 +19,14 @@ const inInit = () => {
 
   nextTick(() => {
     const graph = FlowGraph.init();
+
+    // init window hook
+    window.__x6_instances__ = []
+    window.__x6_instances__.push(graph)
+
     tools(graph)
     const resizeFn = () => {
-      const { width, height } = getContainerSize();
+      const {width, height} = getContainerSize();
       graph.resize(width, height);
     };
     resizeFn();
@@ -62,6 +54,7 @@ onMounted(() => {
 
 <style scoped lang="scss">
 @import "./style/index.scss";
+
 .flow-chart {
   width: 100%;
   height: 100%;

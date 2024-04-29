@@ -24,6 +24,10 @@ export default class FlowGraph {
       container: document.getElementById('graph-container'),
       background: { color: '#F2F7FA' },
       grid: true,
+      panning: {
+        enabled: true,
+        modifiers: 'ctrl'
+      },
       mousewheel: {
         enabled: true,
         zoomAtMousePosition: true,
@@ -32,7 +36,7 @@ export default class FlowGraph {
         maxScale: 3
       },
       connecting: {
-        router: 'manhattan',
+        router: 'metro',
         connector: {
           name: 'rounded',
           args: {
@@ -59,7 +63,8 @@ export default class FlowGraph {
                 }
               }
             },
-            zIndex: 0
+            zIndex: 0,
+            tools: ['edge-editor'],
           })
         },
         validateConnection({ targetMagnet }) {
@@ -134,15 +139,15 @@ export default class FlowGraph {
         {
           title: '基础流程图',
           name: 'group1'
+        },
+        {
+          title: '业务设计图',
+          name: 'group2',
+          graphHeight: 250,
+          layoutOptions: {
+            rowHeight: 70
+          }
         }
-        // {
-        //   title: '系统设计图',
-        //   name: 'group2',
-        //   graphHeight: 250,
-        //   layoutOptions: {
-        //     rowHeight: 70
-        //   }
-        // }
       ],
       layoutOptions: {
         columns: 2,
@@ -201,7 +206,18 @@ export default class FlowGraph {
       shape: 'custom-circle',
       label: '连接'
     })
+
+    const r7 = graph.createNode({
+      shape: 'custom-polygon',
+      attrs: {
+        body: {
+          refPoints: '0,10 10,0 20,10 10,20'
+        }
+      },
+      label: '测站'
+    })
     this.#stencil.load([r1, r2, r3, r4, r5, r6], 'group1')
+    this.#stencil.load([r7], 'group2')
   }
 
   // #region 快捷键与事件

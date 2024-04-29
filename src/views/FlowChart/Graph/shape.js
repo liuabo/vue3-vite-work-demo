@@ -100,9 +100,10 @@ Graph.registerNode(
     ports: { ...ports },
     data: {
       test: '测试'
-    }
+    },
+    tools: ['node-editor'],
   },
-  true
+  true,
 )
 
 Graph.registerNode(
@@ -124,15 +125,8 @@ Graph.registerNode(
     },
     ports: {
       ...ports,
-      items: [
-        {
-          group: 'top'
-        },
-        {
-          group: 'bottom'
-        }
-      ]
-    }
+    },
+    tools: ['node-editor'],
   },
   true
 )
@@ -154,7 +148,8 @@ Graph.registerNode(
         fill: '#262626'
       }
     },
-    ports: { ...ports }
+    ports: { ...ports },
+    tools: ['node-editor'],
   },
   true
 )
@@ -198,7 +193,8 @@ Graph.registerNode(
         fill: '#fff'
       }
     },
-    ports: { ...ports }
+    ports: { ...ports },
+    tools: ['node-editor'],
   },
   true
 )
