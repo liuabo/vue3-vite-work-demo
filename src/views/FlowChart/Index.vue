@@ -44,7 +44,7 @@ onMounted(() => {
 
 <template>
   <div class="flow-chart">
-    <div class="container" id="container">
+    <div class="graph-container" id="container">
       <div id="graph-stencil"></div>
       <div id="graph-container"></div>
       <div id="graph-minimap" class="minimap"></div>
